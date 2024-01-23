@@ -1,9 +1,9 @@
+
+import styles from './form.module.css';
 import React, { useState } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
-import styles from './form.module.css';
-
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -13,18 +13,22 @@ const App = () => {
     setContacts((prevContacts) => [...prevContacts, contact]);
   };
 
+  const handleDeleteContact = (id) => {
+    setContacts((prevContacts) => prevContacts.filter((contact) => contact.id !== id));
+  };
+
   const handleFilterChange = (filterValue) => {
     setFilter(filterValue);
   };
 
   return (
-    <div className={styles.div}>
+    <div className={styles.wrap}>
       <h1>Phonebook</h1>
       <ContactForm contacts={contacts} onAddContact={handleAddContact} />
 
       <h2>Contacts</h2>
       <Filter filter={filter} onFilterChange={handleFilterChange} />
-      <ContactList contacts={contacts} filter={filter} />
+      <ContactList contacts={contacts} filter={filter} onDeleteContact={handleDeleteContact} />
     </div>
   );
 };
