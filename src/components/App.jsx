@@ -4,6 +4,7 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import styles from './form.module.css';
 
+
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
@@ -17,9 +18,9 @@ const App = () => {
   };
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.div}>
       <h1>Phonebook</h1>
-      <ContactForm onSubmit={handleAddContact} />
+      <ContactForm contacts={contacts} onAddContact={handleAddContact} />
 
       <h2>Contacts</h2>
       <Filter filter={filter} onFilterChange={handleFilterChange} />

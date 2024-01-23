@@ -1,8 +1,8 @@
+import styles from './form.module.css';
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
-import styles from './form.module.css';
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = ({ contacts, onAddContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,18 +16,26 @@ const ContactForm = ({ onSubmit }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const isNameExists = contacts.some((contact) => contact.name.toLowerCase() === name.trim().toLowerCase());
+
+    if (isNameExists) {
+      alert('Contact with the same name already exists!');
+      return;
+    }
+
     const contact = {
       id: nanoid(),
       name: name.trim(),
       number: number.trim(),
     };
-    onSubmit(contact);
+    onAddContact(contact);
     setName('');
     setNumber('');
   };
 
   return (
-    <form  className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="name">Name:</label>
       <input
         type="text"
