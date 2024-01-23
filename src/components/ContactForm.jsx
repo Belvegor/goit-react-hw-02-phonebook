@@ -1,6 +1,7 @@
 import styles from './form.module.css';
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 const ContactForm = ({ contacts, onAddContact }) => {
   const [name, setName] = useState('');
@@ -59,6 +60,11 @@ const ContactForm = ({ contacts, onAddContact }) => {
       <button type="submit">Add Contact</button>
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onAddContact: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
